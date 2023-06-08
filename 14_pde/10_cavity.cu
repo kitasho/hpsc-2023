@@ -21,7 +21,7 @@ __global__ void calc_b(double *u, double *v, double *b){
     int idx = threadIdx.x + blockIdx.x * blockDim.x;
     int idy = blockIdx.y;
     int i = idy * nx + idx;
-    if (idx > 0 && idx < nx-1 && idy > 0 && idy < ny-1){
+    if (idx >= 1 && idx < nx-1 && idy >= 1 && idy < ny-1){
         b[i] = rho * (1 / dt *
                     ((u[i+1] - u[i-1]) / (2 * dx) + (v[i+nx] - v[i-nx]) / (2 * dy)) - 
                     ((u[i+1] - u[i-1]) / (2 * dx)) * ((u[i+1] - u[i-1]) / (2 * dx))
